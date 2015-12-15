@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.edgarmoises.spotifywebapicrapper.Model.Album;
-import com.edgarmoises.spotifywebapicrapper.Model.Artists;
 import com.edgarmoises.spotifywebapicrapper.Model.Items;
-import com.edgarmoises.spotifywebapicrapper.Model.Tracks;
 import com.edgarmoises.spotifywebapicrapper.R;
 import com.squareup.picasso.Picasso;
 

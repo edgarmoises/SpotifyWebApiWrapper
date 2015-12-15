@@ -3,4 +3,7 @@
     <string name="artist_fragment_title">Artists</string>
     <string name="album_fragment_title">Albums</string>
     <string name="no_artist">Nothing to see here</string>
+    <string name="search">Search</string>
+    <string name="progress_title">Searching</string>
+    <string name="progress_message">Searching songs...</string>
 </resources>
