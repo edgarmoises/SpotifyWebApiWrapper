@@ -6,4 +6,5 @@
     <string name="search">Search</string>
     <string name="progress_title">Searching</string>
     <string name="progress_message">Searching songs...</string>
+    <string name="song_fragment_title">Songs</string>
 </resources>

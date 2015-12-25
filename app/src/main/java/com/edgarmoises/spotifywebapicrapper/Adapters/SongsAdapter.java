@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.edgarmoises.spotifywebapicrapper.Model.Items;
 import com.edgarmoises.spotifywebapicrapper.R;
 import com.squareup.picasso.Picasso;
@@ -23,6 +22,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>{
     private List<Items> items;
     private Context mContext;
 
+    ItemClickListener mItemClickListener;
+
+    public interface ItemClickListener {
+        void onClick(View view, int position);
+    }
+
     public SongsAdapter(Context context){
         items = new ArrayList<>();
 
@@ -32,6 +37,10 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>{
     public void AddInformation(List<Items> listItems){
         items = listItems;
         notifyDataSetChanged();
+    }
+
+    public List<Items> getResultsList(){
+        return items;
     }
 
     public void ClearInformation(){
@@ -60,7 +69,11 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>{
         return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public void setOnItemClickListener(final ItemClickListener itemClickListener){
+        mItemClickListener = itemClickListener;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView mArtistName;
         public TextView mAlbumName;
@@ -73,6 +86,14 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>{
             mAlbumName = (TextView) itemView.findViewById(R.id.album_name);
             mAlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null){
+                mItemClickListener.onClick(v, getPosition());
+            }
         }
     }
 }

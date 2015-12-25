@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
     }
 
     private void AddFragments(){
-        mPageradapter.addFragment(new SongSearchFragment(), getResources().getString(R.string.artist_fragment_title));
-        mPageradapter.addFragment(new SongSearchFragment(), getResources().getString(R.string.album_fragment_title));
+        mPageradapter.addFragment(new ArtistSearchFragment(), getResources().getString(R.string.artist_fragment_title));
+        mPageradapter.addFragment(new SongSearchFragment(), getResources().getString(R.string.song_fragment_title));
     }
 }

@@ -1,6 +1,8 @@
 package com.edgarmoises.spotifywebapicrapper.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,6 +70,17 @@ public class SongSearchFragment extends Fragment {
     private void InitViews(){
         mResultsList = (RecyclerView) mRootView.findViewById(R.id.results_list);
         mAdapter = new SongsAdapter(getActivity());
+        mAdapter.setOnItemClickListener(new SongsAdapter.ItemClickListener(){
+            @Override
+            public void onClick(View view, int position) {
+                mItems = mAdapter.getResultsList();
+                Items item = mItems.get(position);
+
+                String uri = item.getArtists().get(0).getExternal_urls().getSpotify();
+                Intent launcher = new Intent( Intent.ACTION_VIEW, Uri.parse(uri) );
+                startActivity(launcher);
+            }
+        });
         mManager = new LinearLayoutManager(getActivity());
         mResultsList.setLayoutManager(mManager);
         mResultsList.setAdapter(mAdapter);
@@ -138,12 +151,16 @@ public class SongSearchFragment extends Fragment {
     }
 
     private void ShowProgressDialog(){
-        mProgressDialog = ProgressDialog.show(getActivity(), getString(R.string.progress_title), getString(R.string.progress_message));
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialogStyle);
+            mProgressDialog = ProgressDialog.show(getActivity(), getString(R.string.progress_title), getString(R.string.progress_message));
+        }
     }
 
     private void HideProgressDialog() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
+            mProgressDialog = null;
         }
     }
 }
